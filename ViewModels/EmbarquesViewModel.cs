@@ -11,6 +11,7 @@ namespace WebApplication1.ViewModels
 {
     public class EmbarquesViewModel
     {
+        public int EmbarqueId { get; set; }
         public string Referencia { get; set; }
         public DateTime Fechaarribo { get; set; }
         public string Origen { get; set; }

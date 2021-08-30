@@ -151,9 +151,9 @@
 
 
 
-        function OpenAddPopup() {
+        function OpenAddPopupImages(Id) {
             $.ajax({
-                url: '/Teacher/LoadaddTeacherPopup',
+                url: '/Embarques/LoadaddFilesPopup?EmbarqueId=' + Id,
                 contentType: 'application/html; charset=utf-8',
                 type: 'GET',
                 dataType: 'html',
@@ -188,28 +188,42 @@
 
 
         //Add Data Function
-        function AddTeacher() {
-            var res = ValidateForm();
-            if (res == false) {
-                return false;
-            }
-            var TeacherObj = {
-                Id: $('#Id').val(),
-                Teacher_Name: $('#Teacher_Name').val(),
-                Teacher_Email: $('#Teacher_Email').val(),
-                Teacher_ContactNo: $('#Teacher_ContactNo').val(),
-                Teacher_Department: $('#Teacher_Department').val(),
-                Teacher_Address: $('#Teacher_Address').val(),
+        function AddFiles() {
+
+
+            var FilesObj = {
+                EmbarqueId: $('#EmbarqueId').val(),
+                files: $('#files').val(),
             };
+
+
+            var fileUpload = $("#files").get(0);
+            var files = fileUpload.files;
+
+            // Create FormData object  
+            var fileData = new FormData();
+
+            // Looping over all files and add it to FormData object  
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object  
+            fileData.append('EmbarqueId', $('#EmbarqueId').val());
+
+
+
+
             $.ajax({
-                url: "/Teacher/AddTeacher",
-                data: JSON.stringify(TeacherObj),
+                url: "/Embarques/AddFiles",
+                data: fileData,
                 type: "POST",
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
+                contentType: false, // Not to set any content header  
+                processData: false, // Not to process data  
+
                 success: function (result) {
                     //populate table with new record
-                    BindteacherData();
+                    window.location.href = result.redirectToUrl;
                     $('#AddUpdateModelPopup').modal('hide');
                 },
                 error: function (errormessage) {

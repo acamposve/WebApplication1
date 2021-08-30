@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Helper_Code.Objects;
 using WebApplication1.Helpers;
@@ -14,10 +15,10 @@ namespace WebApplication1.Controllers
 {
     public class EmbarquesController : Controller
     {
-        private EmbarquesHelper eh = new EmbarquesHelper();
-        private ReceiptsLogic rlogic = new ReceiptsLogic();
-        private ReceiptStatusLogic rstatusLogic = new ReceiptStatusLogic();
-        private AccountsLogic accountsLogic = new AccountsLogic();
+        private readonly EmbarquesHelper eh = new EmbarquesHelper();
+        private readonly ReceiptsLogic rlogic = new ReceiptsLogic();
+        private readonly ReceiptStatusLogic rstatusLogic = new ReceiptStatusLogic();
+        private readonly AccountsLogic accountsLogic = new AccountsLogic();
         // GET: Embarques
         public ActionResult Index()
         {
@@ -56,6 +57,94 @@ namespace WebApplication1.Controllers
         }
 
 
+
+
+        [HttpPost]
+
+        public JsonResult AddFiles(EmbarquesViewModel embarques)
+        {
+
+
+            if (Request.Files.Count > 0)
+            {
+                string newFileName = "";
+                try
+                {
+                    //  Get all files from Request object  
+                    HttpFileCollectionBase files = Request.Files;
+
+
+
+                    List<ReceiptFiles> lista = new List<ReceiptFiles>();
+
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        HttpPostedFileBase file = files[i];
+
+
+
+
+
+                        var fname = Path.GetFileName(file.FileName);
+                        string extension = Path.GetExtension(fname);
+                        newFileName = Guid.NewGuid() + extension;
+
+
+
+
+                        // Get the complete folder path and store the file inside it.  
+                        fname = Path.Combine(Server.MapPath("~/UploadedFiles/"), newFileName);
+                        file.SaveAs(fname);
+
+                        ReceiptFiles embarquesBD = new ReceiptFiles();
+                        embarquesBD.EmbarqueId = embarques.EmbarqueId;
+                        embarquesBD.Extension = extension;
+                        embarquesBD.Name = newFileName;
+                        embarquesBD.Path = fname;
+                        lista.Add(embarquesBD);
+                    }
+
+                    // Returns message that successfully uploaded  
+                    rlogic.AddFiles(lista);
+                    return Json(new { redirectToUrl = Url.Action("Details/" + embarques.EmbarqueId, "Embarques") });
+                }
+                catch (Exception ex)
+                {
+                    return Json("Error occurred. Error details: " + ex.Message);
+                }
+            }
+            else
+            {
+                return Json("No files selected.");
+            }
+
+
+
+
+
+        }
+
+
+
+        public ActionResult LoadaddFilesPopup(int EmbarqueId)
+        {
+            try
+            {
+
+
+                EmbarquesViewModel model = new EmbarquesViewModel
+                {
+                    EmbarqueId = EmbarqueId
+                };
+
+                return PartialView("_AddFileReceipt", model);
+            }
+            catch (Exception ex)
+            {
+
+                return PartialView("_EditInfoReceipt");
+            }
+        }
 
 
         //GET: Embarques/Details/5
@@ -237,20 +326,9 @@ namespace WebApplication1.Controllers
         //[ValidateAntiForgeryToken]
         public JsonResult Delete(int id)
         {
-
             var embarque = rlogic.Archivo(id);
-
-
             rlogic.DeleteFile(embarque.Path, embarque.FileId);
-
-
             return Json(new { redirectToUrl = Url.Action("Details/" + embarque.EmbarqueId, "Embarques") });
-
-
-
-            // ViewBag.StatusId = new SelectList(db.ReceiptsStatus, "StatusId", "StatusDescription", embarques.StatusId);
-
-
         }
 
         //// GET: Embarques/Delete/5
