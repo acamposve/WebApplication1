@@ -1,12 +1,8 @@
 ﻿using DocManager.Application.Data.UnitOfWork;
 using DocManager.Application.Logic;
-using DocManager.Core;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Web.Mvc;
-using WebApplication1.Mappings;
-using WebApplication1.Requests;
 
 namespace WebApplication1.Controllers
 {
@@ -20,10 +16,7 @@ namespace WebApplication1.Controllers
         // GET: Accounts
         public ActionResult Index()
         {
-            var request = logic.ListaCuentas();
-            var mapperRequest = CuentasRolesProfile.InitializeAutomapper();
-            var response = mapperRequest.Map<List<Models.AccountWithRole>>(request);
-            return View(response);
+            return View(logic.ListaCuentas());
         }
 
         // GET: Accounts/Details/5
@@ -44,13 +37,7 @@ namespace WebApplication1.Controllers
         // GET: Accounts/Create
         public ActionResult Create()
         {
-
-            var request = rlogic.ListaRoles();
-            var mapperRequest = RolesProfile.InitializeAutomapper();
-            var response = mapperRequest.Map<List<Models.Roles>>(request);
-
-
-            ViewBag.Roles = new SelectList(response, "Id", "RoleName");
+            ViewBag.Roles = new SelectList(rlogic.ListaRoles(), "Id", "RoleName");
             return View();
         }
 
@@ -93,10 +80,9 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            var request = rlogic.ListaRoles();
-            var mapperRequestRoles = RolesProfile.InitializeAutomapper();
-            var responseRoles = mapperRequestRoles.Map<List<Models.Roles>>(request);
-            ViewBag.Roles = new SelectList(responseRoles, "Id", "RoleName");
+
+
+            ViewBag.Roles = new SelectList(rlogic.ListaRoles(), "Id", "RoleName");
             return View(response);
         }
 
@@ -124,12 +110,10 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var frombd = logic.CuentaxId(id);
+            var accounts = logic.CuentaxId(id);
 
 
-            Models.Accounts accounts = new Models.Accounts();
-            accounts.Id = frombd.Id;
-            accounts.FirstName = frombd.FirstName;
+
 
             if (accounts == null)
             {

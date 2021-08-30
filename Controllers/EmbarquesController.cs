@@ -8,8 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Helper_Code.Objects;
 using WebApplication1.Helpers;
-using WebApplication1.Mappings;
-using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -28,10 +26,7 @@ namespace WebApplication1.Controllers
 
         public JsonResult GetReceipt(int? id)
         {
-            var request = rlogic.EmbarquexId(id.GetValueOrDefault());
-            var mapperRequest = EmbarquesProfile.InitializeAutomapper();
-            var response = mapperRequest.Map<Models.Embarques>(request);
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(rlogic.EmbarquexId(id.GetValueOrDefault()), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -40,14 +35,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                var request = rlogic.EmbarquexId(EmbarqueId);
-                var mapperRequest = EmbarquesProfile.InitializeAutomapper();
-                var response = mapperRequest.Map<Models.Embarques>(request);
-
                 var statuses = rstatusLogic.ListaEmbarquesStatus();
 
                 ViewBag.StatusId = new SelectList(statuses, "StatusId", "StatusDescription");
-                return PartialView("_EditInfoReceipt", response);
+                return PartialView("_EditInfoReceipt", rlogic.EmbarquexId(EmbarqueId));
             }
             catch (Exception ex)
             {
@@ -101,6 +92,7 @@ namespace WebApplication1.Controllers
                         embarquesBD.Extension = extension;
                         embarquesBD.Name = newFileName;
                         embarquesBD.Path = fname;
+                        embarquesBD.Size = file.ContentLength;
                         lista.Add(embarquesBD);
                     }
 
@@ -154,30 +146,9 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-
-
-
-
-
-            var request = rlogic.EmbarquexId(id.GetValueOrDefault());
-            var mapperRequest = EmbarquesProfile.InitializeAutomapper();
-            var response = mapperRequest.Map<Models.Embarques>(request);
-
-
-
-
-
-
             ViewBag.Cuentas = accountsLogic.CuentasxEmbarques(id.GetValueOrDefault());
-
             ViewBag.Archivos = rlogic.ArchivosxEmbarque(id.GetValueOrDefault());
-
-            if (response == null)
-            {
-                return HttpNotFound();
-            }
-            return View(response);
+            return View(rlogic.EmbarquexId(id.GetValueOrDefault()));
         }
 
         // GET: Embarques/Create

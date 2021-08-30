@@ -1,9 +1,7 @@
 ﻿using DocManager.Application.Logic;
 using DocManager.Core;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Security;
-using WebApplication1.Mappings;
 
 namespace WebApplication1.Controllers
 {
@@ -88,17 +86,7 @@ namespace WebApplication1.Controllers
         public ActionResult UserDashBoard()
         {
             ReceiptsLogic rl = new ReceiptsLogic();
-
-
-            var request = rl.EmbarquesxCuenta(Session["usuario"].ToString());
-
-
-            var mapperRequest = EmbarquesCuentasProfile.InitializeAutomapper();
-
-
-            var response = mapperRequest.Map<List<Models.EmbarquesCuentas>>(request);
-
-            return View(response);
+            return View(rl.EmbarquesxCuenta(Session["usuario"].ToString()));
             //if (Session["UserID"] != null)
             //{
             //    return View();

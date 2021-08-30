@@ -1,4 +1,5 @@
 ﻿using DocManager.Application.Logic;
+using DocManager.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +14,9 @@ namespace WebApplication1.Helpers
 
         private ReceiptsLogic rlogic = new ReceiptsLogic();
         private AccountsLogic accountsLogic = new AccountsLogic();
-        public List<Models.Embarques> ListaEmbarques()
+        public List<Embarques> ListaEmbarques()
         {
-            var embarques = rlogic.ListaEmbarques();
-
-            List<Models.Embarques> embarquesBD = new List<Models.Embarques>();
-
-            foreach (var item in embarques)
-            {
-
-                Models.Embarques receipts = new Models.Embarques();
-
-                receipts.CantidadContainers = item.CantidadContainers;
-                receipts.Destino = item.Destino;
-                receipts.EmbarqueId = item.EmbarqueId;
-                receipts.FechaArribo = item.FechaArribo;
-                receipts.Mercancia = item.Mercancia;
-                receipts.Origen = item.Origen;
-                receipts.Referencia = item.Referencia;
-                receipts.StatusDescription = item.StatusDescription;
-                embarquesBD.Add(receipts);
-            }
-
-            return embarquesBD;
+            return rlogic.ListaEmbarques(); 
         }
 
 

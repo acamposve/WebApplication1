@@ -161,20 +161,9 @@
     </Compile>
     <Compile Include="Helpers\EmbarquesHelper.cs" />
     <Compile Include="Helper_Code\Objects\AccountObj.cs" />
-    <Compile Include="Mappings\CuentasRolesProfile.cs" />
-    <Compile Include="Mappings\EmbarquesCuentasProfile.cs" />
-    <Compile Include="Mappings\EmbarquesProfile.cs" />
-    <Compile Include="Mappings\RolesProfile.cs" />
-    <Compile Include="Models\Accounts.cs" />
-    <Compile Include="Models\AccountWithRole.cs" />
-    <Compile Include="Models\Embarques.cs" />
-    <Compile Include="Models\EmbarquesCuentas.cs" />
-    <Compile Include="Models\ReceiptsStatus.cs" />
-    <Compile Include="Models\Roles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\AccountCreateRequest.cs" />
     <Compile Include="Requests\EmbarquesRequest.cs" />
-    <Compile Include="Utils\FileManager.cs" />
     <Compile Include="ViewModels\EmbarquesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +294,7 @@
     <Content Include="Content\notika\img\dialog\like.png" />
     <Content Include="Content\notika\img\favicon.ico" />
     <Content Include="Content\notika\img\green1.png" />
+    <Content Include="Content\notika\img\logo.png" />
     <Content Include="Content\notika\img\logo\favicon.png" />
     <Content Include="Content\notika\img\logo\logo.png" />
     <Content Include="Content\notika\img\post\1.jpg" />
@@ -2564,9 +2554,12 @@
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Shared\_AddFileReceipt.cshtml" />
+    <Content Include="Views\Shared\_css.cshtml" />
+    <Content Include="Views\Shared\_scripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

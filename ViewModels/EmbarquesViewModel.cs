@@ -7,7 +7,7 @@ using System.Web;
 using WebApplication1.Helper_Code.Objects;
 
 
-namespace WebApplication1.ViewModels
+namespace DocManager.Core
 {
     public class EmbarquesViewModel
     {
