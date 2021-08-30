@@ -116,7 +116,29 @@ namespace WebApplication1.Controllers
 
         }
 
+        [HttpPost]
 
+        public JsonResult AddClients(EmbarquesClientes embarques)
+        {
+
+
+
+            var cuentas = Request.Form["SelectedMultiAccountId"].Split(',');
+
+
+
+
+
+
+
+            rlogic.AddClientReceipt(embarques.EmbarqueId, cuentas);
+            return Json(new { redirectToUrl = Url.Action("Details/" + embarques.EmbarqueId, "Embarques") });
+
+
+
+
+
+        }
 
         public ActionResult LoadaddFilesPopup(int EmbarqueId)
         {
@@ -137,7 +159,24 @@ namespace WebApplication1.Controllers
                 return PartialView("_EditInfoReceipt");
             }
         }
+        public ActionResult LoadaddClientsPopup(int EmbarqueId)
+        {
+            try
+            {
 
+                EmbarquesViewModel model = new EmbarquesViewModel
+                {
+                    EmbarqueId = EmbarqueId
+                };
+                ViewBag.AccountsId = eh.GetAccountsList();
+                return PartialView("_AddClientsReceipt", model);
+            }
+            catch (Exception ex)
+            {
+
+                return PartialView("_EditInfoReceipt");
+            }
+        }
 
         //GET: Embarques/Details/5
         public ActionResult Details(int? id)

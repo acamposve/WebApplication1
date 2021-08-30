@@ -30,6 +30,52 @@
 
 
 
+        function OpenAddPopupClients(Id) {
+            $.ajax({
+                url: '/Embarques/LoadaddClientsPopup?EmbarqueId=' + Id,
+                contentType: 'application/html; charset=utf-8',
+                type: 'GET',
+                dataType: 'html',
+                success: function (result) {
+                    $('#divcontent').empty();
+                    $('#divcontent').html(result);
+                    $('#AddUpdateModelPopup').modal('show');
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+            })
+        }
+
+        //Add Data Function
+        function AddClients() {
+
+
+            var ClientsObj = {
+                EmbarqueId: $('#EmbarqueId').val(),
+                Cuentas: $('#SelectedMultiAccountId').val(),
+
+
+            };
+            $.ajax({
+                url: "/Embarques/AddClients",
+                data: JSON.stringify(ClientsObj),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    //populate table with new record
+
+                    $('#AddUpdateModelPopup').modal('hide');
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+
+
         function OpenAddPopupImages(Id) {
             $.ajax({
                 url: '/Embarques/LoadaddFilesPopup?EmbarqueId=' + Id,
