@@ -1,0 +1,130 @@
+﻿@model WebApplication1.ViewModels.EmbarquesViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+                
+
+ @using (Html.BeginForm("Create", "Embarques", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="breadcomb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcomb-list">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="breadcomb-wp">
+                                    <div class="breadcomb-icon">
+                                        <i class="notika-icon notika-form"></i>
+                                    </div>
+                                    <div class="breadcomb-ctn">
+                                        <h2>Generar Embarques</h2>
+                                        <p>Módulo para generar Embarques y asignar a clientes.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcomb area End-->
+    <!-- Form Examples area start-->
+    <div class="form-example-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-example-wrap">
+
+                        <div class="form-example-int">
+                            <div class="form-group">
+                                <label>BL</label>
+                                <div class="nk-int-st">
+                                    @Html.EditorFor(model => model.Referencia, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-example-int mg-t-15">
+                            <div class="form-group">
+                                <label>Fecha Arribo</label>
+                                <div class="nk-int-st">
+                                    <input type="date" class="form-control input-sm" id="Fechaarribo" name="Fechaarribo" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-example-int">
+                            <div class="form-group">
+                                <label>Origen</label>
+                                <div class="nk-int-st">
+                                    @Html.EditorFor(model => model.Origen, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-example-int">
+                            <div class="form-group">
+                                <label>Destino</label>
+                                <div class="nk-int-st">
+                                    @Html.EditorFor(model => model.Destino, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-example-int">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <div class="nk-int-st">
+                                    @Html.DropDownList("StatusId", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-example-int">
+                            <div class="form-group">
+                                <label>Cantidad de Containers</label>
+                                <div class="nk-int-st">
+                                    @Html.EditorFor(model => model.CantidadContainers, new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-example-int">
+                            <div class="form-group">
+                                <label>Mercancia</label>
+                                <div class="nk-int-st">
+                                    <textarea name="Mercancia" id="Mercancia" rows="5" cols="60" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-example-int">
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Clientes</label><br />
+                                @foreach (var item in this.ViewBag.AccountsId)
+                                {
+                                    <input type="checkbox" id="SelectedMultiAccountId" name="SelectedMultiAccountId" value="@item.Value" />
+                                    <label for="optionId">@item.Text</label>
+                                    <br />
+                                }
+                            </div>
+                        </div>
+                            <div class="form-example-int">
+                                <div class="form-group">
+                                    <label>Archivos Adjuntos</label>
+                                    <div class="nk-int-st">
+                                        @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-example-int mg-t-15">
+                                <button class="btn btn-success notika-btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+}
