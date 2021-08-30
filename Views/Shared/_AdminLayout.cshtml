@@ -264,16 +264,16 @@
 
 
         //function for deleting Teacher's record
-        function DeleleTeacher(ID) {
+        function DeleteFileReceipt(ID) {
             var ans = confirm("Are you sure you want to delete?");
             if (ans) {
                 $.ajax({
-                    url: "/Teacher/DeleteTeacher?TeacherId=" + ID,
+                    url: "/Embarques/Delete?id=" + ID,
                     type: "POST",
                     contentType: "application/json;charset=UTF-8",
                     dataType: "json",
                     success: function (result) {
-                        BindteacherData();
+                        window.location.href = result.redirectToUrl;
                     },
                     error: function (errormessage) {
                         alert(errormessage.responseText);

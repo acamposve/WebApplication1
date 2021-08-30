@@ -230,6 +230,29 @@ namespace WebApplication1.Controllers
 
         }
 
+
+
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public JsonResult Delete(int id)
+        {
+
+            var embarque = rlogic.Archivo(id);
+
+
+            rlogic.DeleteFile(embarque.Path, embarque.FileId);
+
+
+            return Json(new { redirectToUrl = Url.Action("Details/" + embarque.EmbarqueId, "Embarques") });
+
+
+
+            // ViewBag.StatusId = new SelectList(db.ReceiptsStatus, "StatusId", "StatusDescription", embarques.StatusId);
+
+
+        }
+
         //// GET: Embarques/Delete/5
         //public ActionResult Delete(int? id)
         //{

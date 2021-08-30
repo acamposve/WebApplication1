@@ -2489,11 +2489,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\script-bootstrap-select.js" />
-    <Content Include="UploadedFiles\0eee9868-66f6-46b0-a981-0c1b5210c7d5.png" />
     <Content Include="UploadedFiles\1ac57bcb-eba5-4d02-8a25-bd0d3f793402.jpg" />
     <Content Include="UploadedFiles\1dc5929f-8fd9-46c4-a217-58c2662df0b0.jpg" />
     <Content Include="UploadedFiles\2ee4a46f-27c6-4512-b077-ebfba282f306.jpg" />
-    <Content Include="UploadedFiles\5e92fe18-ae00-4c9a-93c4-9d678558d4d4.png" />
     <Content Include="UploadedFiles\5f308e30-9882-42ff-93e8-ca3937f1d1fa.jpg" />
     <Content Include="UploadedFiles\6342d554-ca60-4a54-9a0f-3adda3b1bf51.jpg" />
     <Content Include="UploadedFiles\8d2e8fcd-8936-4521-a68e-8298f4da2fc9.png" />
