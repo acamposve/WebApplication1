@@ -48,6 +48,26 @@ namespace WebApplication1.Controllers
         }
 
 
+        [HttpPost]
+
+        public JsonResult AddClient(EmbarquesAccountsScript embarques)
+        {
+            rlogic.AddClientReceipt(int.Parse(embarques.EmbarquesId), int.Parse(embarques.AccountId));
+            return Json(new { redirectToUrl = Url.Action("Details/" + embarques.EmbarquesId, "Embarques") });
+        }
+
+
+
+
+
+        [HttpPost]
+
+        public JsonResult DeleteClient(EmbarquesAccountsScript embarques)
+        {
+            rlogic.DeleteClientReceipt(int.Parse(embarques.EmbarquesId), int.Parse(embarques.AccountId));
+            return Json(new { redirectToUrl = Url.Action("Details/" + embarques.EmbarquesId, "Embarques") });
+        }
+
 
 
         [HttpPost]
@@ -116,29 +136,8 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpPost]
-
-        public JsonResult AddClients(EmbarquesClientes embarques)
-        {
 
 
-
-            var cuentas = Request.Form["SelectedMultiAccountId"].Split(',');
-
-
-
-
-
-
-
-            rlogic.AddClientReceipt(embarques.EmbarqueId, cuentas);
-            return Json(new { redirectToUrl = Url.Action("Details/" + embarques.EmbarqueId, "Embarques") });
-
-
-
-
-
-        }
 
         public ActionResult LoadaddFilesPopup(int EmbarqueId)
         {
@@ -186,6 +185,10 @@ namespace WebApplication1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ViewBag.Cuentas = accountsLogic.CuentasxEmbarques(id.GetValueOrDefault());
+
+
+
+            ViewBag.CuentasDisponibles = accountsLogic.CuentasDisponibles(id.GetValueOrDefault());
             ViewBag.Archivos = rlogic.ArchivosxEmbarque(id.GetValueOrDefault());
             return View(rlogic.EmbarquexId(id.GetValueOrDefault()));
         }

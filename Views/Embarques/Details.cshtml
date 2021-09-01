@@ -108,18 +108,57 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="invoice-ds-int">
+                                <h2>Clientes Disponibles</h2>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td>Nombre</td>
+                                        <td>Apellido</td>
+                                        <td></td>
+                                    </tr>
+
+                                    @foreach (var item in ViewBag.CuentasDisponibles)
+                                    {
+                                        <tr>
+                                            <td>@item.FirstName</td>
+                                            <td>@item.LastName</td>
+                                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="AddClientReceipt('@item.Id', '@Html.DisplayFor(model => model.EmbarqueId)');">Agregar Cliente</button></td>
+                                        </tr>
+
+
+                                    }
+                                </table>
+                            </div>
+
+                        </div>                       
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <div class="invoice-ds-int">
                                 <h2>Clientes Asignados</h2>
-                                @foreach (var item in ViewBag.Cuentas)
-                                {
-                                    <p>@item.FirstName @item.LastName</p>
-                                }
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="OpenAddPopupClients(' + @Html.DisplayFor(model => model.EmbarqueId) + ');">Agregar Clientes</button><br /><br />
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td>Nombre</td>
+                                        <td>Apellido</td>
+                                        <td></td>
+                                    </tr>
+                                    @foreach (var item in ViewBag.Cuentas)
+                                    {
+                                        <tr>
+                                            <td>@item.FirstName</td>
+                                            <td>@item.LastName</td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" onclick="DeleteClientReceipt('@item.Id', '@Html.DisplayFor(model => model.EmbarqueId)');">Eliminar Clientes</button>
+                                            </td>
+                                        </tr>
 
+                                    }
+                                </table>
                             </div>
 
                         </div>
+
+
+
                     </div>
                 </div>
             </div>

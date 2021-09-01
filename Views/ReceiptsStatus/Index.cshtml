@@ -2,32 +2,49 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusDescription)
-        </th>
-        <th></th>
-    </tr>
+<div class="data-table-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                        <h2>Status Embarques</h2>
+                        <p>Lista de los status de embarques creados en el sistema.</p>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="data-table-basic" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.StatusDescription)</th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StatusId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StatusId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StatusId })
-        </td>
-    </tr>
-}
 
-</table>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StatusDescription)
+                                        </td>
+                                      
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.StatusId }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.StatusId }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.StatusId })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

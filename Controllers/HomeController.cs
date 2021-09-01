@@ -44,19 +44,26 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = accountsLogic.Login(objUser); 
-                FormsAuthentication.SetAuthCookie(objUser.Email, false);
-                Session["usuario"] = objUser.Email.ToLower();
+                var user = accountsLogic.Login(objUser);
 
-                if (user.Id == 1)
-                {
 
-                    return RedirectToAction("AdminDashBoard", "Home");
-                }
-                else
+
+                if (user != null)
                 {
-                    return RedirectToAction("UserDashBoard", "Home");
+                    FormsAuthentication.SetAuthCookie(objUser.Email, false);
+                    Session["usuario"] = objUser.Email.ToLower();
+
+                    if (user.Id == 1)
+                    {
+
+                        return RedirectToAction("AdminDashBoard", "Home");
+                    }
+                    else
+                    {
+                        return RedirectToAction("UserDashBoard", "Home");
+                    }
                 }
+
             }
             ModelState.AddModelError("", "invalid Username or Password");
             return View();

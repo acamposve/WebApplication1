@@ -15,7 +15,16 @@
                     <li>
                         <a data-toggle="tab" href="#Charts"><i class="fas fa-thermometer-empty"></i>Status Embarques</a>
                     </li>
-                  
+                    <li>
+                        <a href="@Url.Action("Logout", "Home")" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Salir
+                            </p>
+                        </a>
+
+                    </li>
+
                 </ul>
                 <div class="tab-content custom-menu-content">
                     <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
@@ -75,7 +84,9 @@
                                 </a>
                             </li>
                             <li>
-                                Agregar
+                                <a href="@Url.Action("Create", "ReceiptsStatus")" class="nav-link">
+                                    Agregar
+                                </a>
                             </li>
 
                         </ul>

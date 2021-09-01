@@ -202,6 +202,97 @@
         }
 
 
+
+
+
+        //function for updating Patient record
+        function AddClientReceipt(ClientId, ReceiptId) {
+
+
+            var ClientReceiptObj = {
+                AccountId: ClientId,
+                EmbarquesId: ReceiptId,
+            };
+
+
+
+
+            console.log(ClientReceiptObj);
+            if (!ClientReceiptObj.EmbarquesId || ClientReceiptObj.EmbarquesId <= 0) {
+                alert("Invalid Id!");
+                return false;
+            }
+            var headers = { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() };
+
+            $.ajax({
+                url: "/Embarques/AddClient",
+                headers: headers,
+                data: JSON.stringify(ClientReceiptObj),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    //BindteacherData();
+                    swal(
+                        "Sccess!",
+                        "Your note has been saved!",
+                        "success"
+                    )
+                    window.location.href = result.redirectToUrl;
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+
+
+
+        //function for updating Patient record
+        function DeleteClientReceipt(ClientId, ReceiptId) {
+
+
+            var ClientReceiptObj = {
+                AccountId: ClientId,
+                EmbarquesId: ReceiptId,
+            };
+
+
+
+
+            console.log(ClientReceiptObj);
+            if (!ClientReceiptObj.EmbarquesId || ClientReceiptObj.EmbarquesId <= 0) {
+                alert("Invalid Id!");
+                return false;
+            }
+            var headers = { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() };
+
+            $.ajax({
+                url: "/Embarques/DeleteClient",
+                headers: headers,
+                data: JSON.stringify(ClientReceiptObj),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    //BindteacherData();
+                    swal(
+                        "Sccess!",
+                        "Your note has been saved!",
+                        "success"
+                    )
+                    window.location.href = result.redirectToUrl;
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+
+
+
         //function for deleting Teacher's record
         function DeleteFileReceipt(ID) {
             var ans = confirm("Are you sure you want to delete?");
