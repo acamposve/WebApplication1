@@ -237,6 +237,10 @@
     <Content Include="Content\dist\js\pages\dashboard2.js" />
     <Content Include="Content\dist\js\pages\dashboard3.js" />
     <Content Include="Content\images\Cargo-Logo.png" />
+    <Content Include="Content\images\excel.png" />
+    <Content Include="Content\images\pdf.jpg" />
+    <Content Include="Content\images\ppt.png" />
+    <Content Include="Content\images\word.png" />
     <Content Include="Content\notika\css\animate.css" />
     <Content Include="Content\notika\css\animation\animation-custom.css" />
     <Content Include="Content\notika\css\bootstrap-select\bootstrap-select.css" />
@@ -2557,6 +2561,9 @@
     <Content Include="Views\Shared\_css.cshtml" />
     <Content Include="Views\Shared\_scripts.cshtml" />
     <Content Include="Views\Shared\_AddClientsReceipt.cshtml" />
+    <Content Include="Views\Shared\_MainMenu.cshtml" />
+    <Content Include="Views\Embarques\DetallesEmbarques.cshtml" />
+    <Content Include="Views\Home\DetallesEmbarques.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,13 +23,10 @@ namespace WebApplication1.Controllers
             return View(eh.ListaEmbarques());
         }
 
-
         public JsonResult GetReceipt(int? id)
         {
             return Json(rlogic.EmbarquexId(id.GetValueOrDefault()), JsonRequestBehavior.AllowGet);
         }
-
-
 
         public ActionResult LoadEditReceiptPopup(int EmbarqueId)
         {
@@ -47,31 +44,21 @@ namespace WebApplication1.Controllers
             }
         }
 
-
         [HttpPost]
-
         public JsonResult AddClient(EmbarquesAccountsScript embarques)
         {
             rlogic.AddClientReceipt(int.Parse(embarques.EmbarquesId), int.Parse(embarques.AccountId));
             return Json(new { redirectToUrl = Url.Action("Details/" + embarques.EmbarquesId, "Embarques") });
         }
 
-
-
-
-
         [HttpPost]
-
         public JsonResult DeleteClient(EmbarquesAccountsScript embarques)
         {
             rlogic.DeleteClientReceipt(int.Parse(embarques.EmbarquesId), int.Parse(embarques.AccountId));
             return Json(new { redirectToUrl = Url.Action("Details/" + embarques.EmbarquesId, "Embarques") });
         }
 
-
-
         [HttpPost]
-
         public JsonResult AddFiles(EmbarquesViewModel embarques)
         {
 
@@ -135,9 +122,6 @@ namespace WebApplication1.Controllers
 
 
         }
-
-
-
 
         public ActionResult LoadaddFilesPopup(int EmbarqueId)
         {
@@ -219,21 +203,6 @@ namespace WebApplication1.Controllers
             ViewBag.AccountsId = eh.GetAccountsList();
         }
 
-
-
-        /// <summary>  
-        /// Get country method.  
-        /// </summary>  
-        /// <returns>Return country for drop down list.</returns>  
-
-
-
-
-
-
-        // POST: Embarques/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(EmbarquesViewModel embarques, FormCollection formval)
@@ -267,7 +236,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-
         public ActionResult DownloadFile(string name)
         {
 
@@ -296,25 +264,7 @@ namespace WebApplication1.Controllers
             return data;
 
         }
-        // GET: Embarques/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Embarques embarques = db.Embarques.Find(id);
-        //    if (embarques == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.StatusId = new SelectList(db.ReceiptsStatus, "StatusId", "StatusDescription", embarques.StatusId);
-        //    return View(embarques);
-        //}
 
-        // POST: Embarques/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public JsonResult Edit(Embarques embarques)
@@ -332,9 +282,6 @@ namespace WebApplication1.Controllers
 
         }
 
-
-
-
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public JsonResult Delete(int id)
@@ -344,31 +291,8 @@ namespace WebApplication1.Controllers
             return Json(new { redirectToUrl = Url.Action("Details/" + embarque.EmbarqueId, "Embarques") });
         }
 
-        //// GET: Embarques/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Embarques embarques = db.Embarques.Find(id);
-        //    if (embarques == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(embarques);
-        //}
 
-        //// POST: Embarques/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Embarques embarques = db.Embarques.Find(id);
-        //    db.Embarques.Remove(embarques);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+
 
 
     }

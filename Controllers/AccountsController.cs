@@ -113,7 +113,7 @@ namespace WebApplication1.Controllers
             var accounts = logic.CuentaxId(id);
 
 
-
+            ViewBag.Embarques = logic.ReceiptsAccounts(id.GetValueOrDefault());
 
             if (accounts == null)
             {

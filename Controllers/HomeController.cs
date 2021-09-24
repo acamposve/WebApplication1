@@ -1,5 +1,6 @@
 ﻿using DocManager.Application.Logic;
 using DocManager.Core;
+using System.IO;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -9,6 +10,11 @@ namespace WebApplication1.Controllers
     {
 
         private AccountsLogic accountsLogic = new AccountsLogic();
+        private readonly ReceiptsLogic rlogic = new ReceiptsLogic();
+
+
+
+
         public ActionResult Index()
         {
             return View();
@@ -93,15 +99,57 @@ namespace WebApplication1.Controllers
         public ActionResult UserDashBoard()
         {
             ReceiptsLogic rl = new ReceiptsLogic();
-            return View(rl.EmbarquesxCuenta(Session["usuario"].ToString()));
-            //if (Session["UserID"] != null)
-            //{
-            //    return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Login");
-            //}
+            var datos = rl.EmbarquesxCuenta(Session["usuario"].ToString());
+
+
+            return View(datos);
+
+
+        }
+
+        public ActionResult DownloadFile(string name)
+        {
+
+            string fullName = Path.Combine(Server.MapPath("~/UploadedFiles/" + name));
+
+            //WebClient webClient = new WebClient();
+            //webClient.DownloadFile(ruta + "tablas_payout.jpg", @"C:\imagenesembarques\tablas_payout.jpg");
+            //return RedirectToAction("Index");
+
+
+
+
+
+            byte[] fileBytes = GetFile(fullName);
+            return File(
+                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, name);
+        }
+
+
+
+        byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
+
+        }
+
+        public ActionResult DetallesEmbarques(int id)
+        {
+            var datos = rlogic.EmbarquexId(id);
+            //ViewBag.Cuentas = accountsLogic.CuentasxEmbarques(id.GetValueOrDefault());
+
+
+
+            //ViewBag.CuentasDisponibles = accountsLogic.CuentasDisponibles(id.GetValueOrDefault());
+            ViewBag.Imagenes = rlogic.ImagenesxEmbarque(id);
+            ViewBag.Documentos = rlogic.DocumentosxEmbarque(id);
+
+            return View(datos);
         }
     }
 }

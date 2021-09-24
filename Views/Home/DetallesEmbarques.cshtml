@@ -1,0 +1,106 @@
+﻿@model DocManager.Core.Embarques
+@{
+    ViewBag.Title = "DetallesEmbarques";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="data-table-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                        <h2>Detalle Embarque @Html.DisplayFor(model => model.Referencia)</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="data-table-basic" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>BL</th>
+                                    <th>Fecha Arribo</th>
+                                    <th>Origen</th>
+                                    <th>Destino</th>
+                                    <th>Status</th>
+                                    <th>Cantidad Containers</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td>@Html.DisplayFor(model => model.Referencia)</td>
+                                    <td>@Html.DisplayFor(model => model.FechaArribo)</td>
+                                    <td>@Html.DisplayFor(model => model.Origen)</td>
+                                    <td>@Html.DisplayFor(model => model.Destino)</td>
+                                    <td>@Html.DisplayFor(model => model.StatusDescription)</td>
+                                    <td>@Html.DisplayFor(model => model.CantidadContainers)</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+                        <table id="data-table-basic" class="table table-striped">
+                            <tr>
+
+                                <td>
+                                    <table id="data-table-basic" class="table table-striped">
+                                        <tr>
+                                            <th colspan="2" style="background-color:greenyellow"><h1>IMAGENES</h1></th>
+                                        </tr>
+
+
+
+                                        @foreach (var archivo in ViewBag.Imagenes)
+                                        {
+                                            <tr>
+                                                <td><img src="~/UploadedFiles/@archivo.Name" style="width:50px; height:50px;" /></td>
+                                                <td>@Html.ActionLink("Bajar Archivo", "DownloadFile", new { name = archivo.Name })</td>
+                                            </tr>
+                                        }
+                                    </table>
+
+                                </td>
+                                <td>
+                                    <table id="data-table-basic" class="table table-striped">
+                                        <tr>
+                                            <th style="background-color:cyan" colspan="2"><h1>DOCUMENTOS</h1></th>
+                                        </tr>
+
+                                        @foreach (var documento in ViewBag.Documentos)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @if (documento.Extension == ".pdf")
+                                                    {
+
+
+                                                        <img src="~/Content/images/pdf.jpg" style="width:50px; height:50px;" />
+
+                                                    }
+
+
+
+                                                </td>
+                                                <td>@documento.Name</td>
+                                            </tr>
+                                        }
+                                    </table>
+
+                                </td>
+
+                            </tr>  
+                            </table>
+
+
+
+
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
